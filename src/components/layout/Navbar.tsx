@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom";
-import { Button } from "@/components/ui/button";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { Link, useLocation } from "react-router-dom";
 import { useState, useEffect } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,91 +17,98 @@ export default function Navbar() {
   const navLinks = [
     { name: "Services", href: "/services" },
     { name: "Case Studies", href: "/case-studies" },
-    { name: "About", href: "/about" },
+    { name: "Company", href: "/about" },
     { name: "Careers", href: "/careers" },
   ];
 
   return (
-    <header
+    <nav
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-white/80 backdrop-blur-md border-b border-slate-200 shadow-sm py-3"
-          : "bg-transparent py-5"
+          ? "bg-surface/80 backdrop-blur-xl shadow-sm h-20 border-b border-outline-variant/10"
+          : "bg-transparent h-24"
       }`}
     >
-      <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <Link to="/" className="flex items-center gap-2 group">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold text-xl group-hover:bg-blue-700 transition-colors">
-            H
-          </div>
-          <span className="font-bold text-xl tracking-tight text-slate-900">
-            Hash Code
-          </span>
-        </Link>
+      <div className="flex justify-between items-center max-w-7xl mx-auto px-8 h-full">
+        <div className="flex items-center gap-2">
+          <Link to="/" className="text-xl font-bold tracking-tighter text-on-surface font-headline">
+            Hash Code <span className="text-primary italic">Technologies</span>
+          </Link>
+        </div>
 
         {/* Desktop Nav */}
-        <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.href}
-              className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors"
-            >
-              {link.name}
-            </Link>
-          ))}
-        </nav>
+        <div className="hidden lg:flex items-center gap-8 font-label font-bold tracking-wider uppercase text-xs">
+          {navLinks.map((link) => {
+            const isActive = location.pathname.startsWith(link.href);
+            return (
+              <Link
+                key={link.name}
+                to={link.href}
+                className={`transition-all duration-300 ${
+                  isActive
+                    ? "text-primary"
+                    : "text-on-surface-variant hover:text-on-surface"
+                }`}
+              >
+                {link.name}
+              </Link>
+            );
+          })}
+        </div>
 
-        <div className="hidden md:flex items-center gap-4">
-          <Link to="/contact" className="text-sm font-medium text-slate-600 hover:text-blue-600 transition-colors">
-            Sign In
+        <div className="hidden lg:flex items-center gap-4">
+          <Link to="/contact">
+            <button className="px-5 py-2.5 text-sm font-bold text-on-surface hover:text-primary transition-all rounded-lg">
+              Contact Us
+            </button>
           </Link>
-          <Button asChild variant="premium">
-            <Link to="/contact">Book Consultation</Link>
-          </Button>
+          <Link to="/contact">
+            <button className="bg-primary text-on-primary px-6 py-2.5 text-sm font-bold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary-container hover:text-on-primary-container transition-all">
+              Book Consultation
+            </button>
+          </Link>
         </div>
 
         {/* Mobile Menu Toggle */}
         <button
-          className="md:hidden p-2 text-slate-600"
+          className="lg:hidden p-2 text-on-surface"
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         >
-          {mobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          <span className="material-symbols-outlined text-2xl">
+            {mobileMenuOpen ? "close" : "menu"}
+          </span>
         </button>
       </div>
 
       {/* Mobile Nav */}
-      <AnimatePresence>
-        {mobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-white border-b border-slate-200 overflow-hidden"
-          >
-            <div className="container mx-auto px-4 py-4 flex flex-col gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className="text-base font-medium text-slate-800 py-2 border-b border-slate-100"
-                  onClick={() => setMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
-              <div className="flex flex-col gap-3 pt-2">
-                <Button asChild variant="outline" className="w-full justify-center">
-                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Sign In</Link>
-                </Button>
-                <Button asChild variant="premium" className="w-full justify-center">
-                  <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>Book Consultation</Link>
-                </Button>
-              </div>
+      {mobileMenuOpen && (
+        <div className="lg:hidden bg-surface fixed top-20 left-0 w-full h-[calc(100vh-5rem)] overflow-y-auto border-t border-outline-variant/10">
+          <div className="flex flex-col px-8 py-8 gap-6">
+            {navLinks.map((link) => (
+              <Link
+                key={link.name}
+                to={link.href}
+                className="text-2xl font-headline font-bold text-on-surface"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {link.name}
+              </Link>
+            ))}
+            <div className="flex flex-col gap-4 mt-8">
+              <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                <button className="w-full py-4 text-lg font-bold text-on-surface border border-outline-variant/20 rounded-xl hover:bg-surface-container-low transition-colors">
+                  Contact Us
+                </button>
+              </Link>
+              <Link to="/contact" onClick={() => setMobileMenuOpen(false)}>
+                <button className="w-full bg-primary text-on-primary py-4 text-lg font-bold rounded-xl shadow-lg shadow-primary/20 hover:bg-primary-container hover:text-on-primary-container transition-all">
+                  Book Consultation
+                </button>
+              </Link>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+          </div>
+        </div>
+      )}
+    </nav>
   );
 }

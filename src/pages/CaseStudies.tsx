@@ -1,6 +1,4 @@
-import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
-import { ArrowRight, TrendingUp, Clock, DollarSign } from "lucide-react";
 
 export default function CaseStudies() {
   const cases = [
@@ -10,9 +8,9 @@ export default function CaseStudies() {
       title: "Scaling a Payment Gateway to 10M+ Daily Transactions",
       category: "Enterprise Application",
       metrics: [
-        { label: "Latency Reduction", value: "40%", icon: <Clock className="w-4 h-4" /> },
-        { label: "Cost Optimization", value: "$2M/yr", icon: <DollarSign className="w-4 h-4" /> },
-        { label: "Uptime", value: "99.99%", icon: <TrendingUp className="w-4 h-4" /> }
+        { label: "Latency Reduction", value: "40%", icon: "schedule" },
+        { label: "Cost Optimization", value: "$2M/yr", icon: "payments" },
+        { label: "Uptime", value: "99.99%", icon: "trending_up" }
       ],
       image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2070&auto=format&fit=crop"
     },
@@ -22,8 +20,8 @@ export default function CaseStudies() {
       title: "AI-Powered Diagnostic Assistant for Radiologists",
       category: "AI / ML Solutions",
       metrics: [
-        { label: "Accuracy", value: "94%", icon: <TrendingUp className="w-4 h-4" /> },
-        { label: "Time Saved", value: "3hrs/day", icon: <Clock className="w-4 h-4" /> }
+        { label: "Accuracy", value: "94%", icon: "trending_up" },
+        { label: "Time Saved", value: "3hrs/day", icon: "schedule" }
       ],
       image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=2070&auto=format&fit=crop"
     },
@@ -33,66 +31,75 @@ export default function CaseStudies() {
       title: "Legacy to Microservices: Zero-Downtime Migration",
       category: "Legacy Modernization",
       metrics: [
-        { label: "Page Load", value: "-60%", icon: <Clock className="w-4 h-4" /> },
-        { label: "Conversion", value: "+22%", icon: <TrendingUp className="w-4 h-4" /> }
+        { label: "Page Load", value: "-60%", icon: "schedule" },
+        { label: "Conversion", value: "+22%", icon: "trending_up" }
       ],
       image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=2015&auto=format&fit=crop"
     }
   ];
 
   return (
-    <div className="pt-24 pb-20">
-      <section className="bg-slate-50 py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-6">
+    <div className="pt-20">
+      {/* Header */}
+      <section className="relative py-24 md:py-32 bg-surface overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-container/30 rounded-full blur-[100px] -mr-48 -mt-48"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-tertiary-fixed/20 rounded-full blur-[80px] -ml-24 -mb-24"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-8 relative z-10">
           <div className="max-w-3xl">
-            <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6">Proven Results.</h1>
-            <p className="text-xl text-slate-600 leading-relaxed">
+            <div className="inline-flex items-center gap-2 bg-surface-container-high px-4 py-1.5 rounded-full mb-8">
+              <span className="innovation-pulse"></span>
+              <span className="text-xs font-label font-bold tracking-widest text-on-primary-fixed-variant uppercase">Success Stories</span>
+            </div>
+            <h1 className="font-headline font-extrabold text-5xl md:text-6xl text-on-surface mb-6 tracking-tight">
+              Proven <span className="text-primary italic">Results</span>.
+            </h1>
+            <p className="text-xl text-on-surface-variant leading-relaxed">
               Discover how we've helped enterprises and ambitious startups solve complex engineering challenges and achieve measurable business outcomes.
             </p>
           </div>
         </div>
       </section>
 
-      <section className="py-20 bg-white">
-        <div className="container mx-auto px-4 md:px-6">
+      {/* Case Studies List */}
+      <section className="py-24 bg-surface-container-low border-t border-outline-variant/10">
+        <div className="max-w-7xl mx-auto px-8">
           <div className="grid gap-16">
             {cases.map((study, idx) => (
-              <motion.div 
+              <div 
                 key={study.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
                 className="grid lg:grid-cols-2 gap-12 items-center group"
               >
                 <div className={`order-2 ${idx % 2 === 0 ? 'lg:order-1' : 'lg:order-2'}`}>
-                  <div className="text-sm font-bold text-blue-600 uppercase tracking-wider mb-3">
+                  <div className="text-xs font-label font-bold text-primary uppercase tracking-wider mb-3">
                     {study.category}
                   </div>
-                  <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4 group-hover:text-blue-600 transition-colors">
+                  <h2 className="font-headline text-3xl md:text-4xl font-bold text-on-surface mb-4 group-hover:text-primary transition-colors">
                     {study.title}
                   </h2>
-                  <p className="text-lg text-slate-500 font-medium mb-8">Client: {study.client}</p>
+                  <p className="text-lg text-on-surface-variant font-medium mb-8">Client: {study.client}</p>
                   
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-6 mb-10">
                     {study.metrics.map((metric, i) => (
                       <div key={i}>
-                        <div className="flex items-center gap-2 text-slate-500 text-sm font-medium mb-1">
-                          {metric.icon} {metric.label}
+                        <div className="flex items-center gap-2 text-outline text-xs font-label font-bold uppercase tracking-wider mb-1">
+                          <span className="material-symbols-outlined text-sm">{metric.icon}</span> {metric.label}
                         </div>
-                        <div className="text-2xl font-bold text-slate-900">{metric.value}</div>
+                        <div className="font-headline text-3xl font-extrabold text-on-surface">{metric.value}</div>
                       </div>
                     ))}
                   </div>
                   
                   <Link 
                     to={`/case-studies/${study.id}`} 
-                    className="inline-flex items-center font-semibold text-slate-900 hover:text-blue-600"
+                    className="inline-flex items-center font-bold text-primary hover:text-primary-container transition-colors"
                   >
-                    Read Full Case Study <ArrowRight className="ml-2 h-5 w-5" />
+                    Read Full Case Study <span className="material-symbols-outlined ml-2 text-sm">arrow_forward</span>
                   </Link>
                 </div>
                 
-                <div className={`order-1 ${idx % 2 === 0 ? 'lg:order-2' : 'lg:order-1'} overflow-hidden rounded-3xl shadow-lg`}>
+                <div className={`order-1 ${idx % 2 === 0 ? 'lg:order-2' : 'lg:order-1'} overflow-hidden rounded-3xl shadow-xl border border-outline-variant/10`}>
                   <img 
                     src={study.image} 
                     alt={study.title} 
@@ -100,7 +107,7 @@ export default function CaseStudies() {
                     referrerPolicy="no-referrer"
                   />
                 </div>
-              </motion.div>
+              </div>
             ))}
           </div>
         </div>

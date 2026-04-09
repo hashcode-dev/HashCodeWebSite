@@ -1,5 +1,3 @@
-import { Button } from "@/components/ui/button";
-import { Mail, Phone, MapPin, CheckCircle2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
@@ -30,116 +28,133 @@ export default function Contact() {
   };
 
   return (
-    <div className="pt-24 pb-20">
-      <section className="bg-slate-50 py-20">
-        <div className="container mx-auto px-4 md:px-6">
+    <div className="pt-20">
+      <section className="relative py-24 md:py-32 bg-surface overflow-hidden">
+        <div className="absolute inset-0 z-0 opacity-10 pointer-events-none">
+          <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-primary-container/30 rounded-full blur-[100px] -mr-48 -mt-48"></div>
+          <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-tertiary-fixed/20 rounded-full blur-[80px] -ml-24 -mb-24"></div>
+        </div>
+        <div className="max-w-7xl mx-auto px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-16">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">Let's build something extraordinary.</h1>
-              <p className="text-lg text-slate-600 mb-12">
+              <div className="inline-flex items-center gap-2 bg-surface-container-high px-4 py-1.5 rounded-full mb-8">
+                <span className="innovation-pulse"></span>
+                <span className="text-xs font-label font-bold tracking-widest text-on-primary-fixed-variant uppercase">Get in Touch</span>
+              </div>
+              <h1 className="font-headline font-extrabold text-5xl md:text-6xl text-on-surface mb-6 tracking-tight">
+                Let's build something <span className="text-primary italic">extraordinary</span>.
+              </h1>
+              <p className="text-xl text-on-surface-variant leading-relaxed mb-12">
                 Whether you need a full product team, an architecture review, or staff augmentation, our experts are ready to help.
               </p>
               
               <div className="space-y-8">
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0">
-                    <Mail size={24} />
+                  <div className="w-14 h-14 bg-surface-container-high text-primary rounded-2xl flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-3xl">mail</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-1">Email Us</h3>
-                    <p className="text-slate-600">hello@hashcode.dev</p>
+                    <h3 className="font-headline font-bold text-xl text-on-surface mb-1">Email Us</h3>
+                    <p className="text-on-surface-variant">hello@hashcode.dev</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0">
-                    <Phone size={24} />
+                  <div className="w-14 h-14 bg-surface-container-high text-tertiary rounded-2xl flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-3xl">call</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-1">Call Us</h3>
-                    <p className="text-slate-600">+1 (555) 123-4567</p>
+                    <h3 className="font-headline font-bold text-xl text-on-surface mb-1">Call Us</h3>
+                    <p className="text-on-surface-variant">+1 (555) 123-4567</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center shrink-0">
-                    <MapPin size={24} />
+                  <div className="w-14 h-14 bg-surface-container-high text-secondary rounded-2xl flex items-center justify-center shrink-0">
+                    <span className="material-symbols-outlined text-3xl">location_on</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-bold text-slate-900 mb-1">Headquarters</h3>
-                    <p className="text-slate-600">100 Innovation Drive<br/>San Francisco, CA 94103</p>
+                    <h3 className="font-headline font-bold text-xl text-on-surface mb-1">Headquarters</h3>
+                    <p className="text-on-surface-variant">100 Innovation Drive<br/>San Francisco, CA 94103</p>
                   </div>
                 </div>
               </div>
             </div>
             
-            <div className="bg-white p-8 md:p-10 rounded-3xl shadow-lg border border-slate-100">
+            <div className="bg-surface-container-lowest p-8 md:p-10 rounded-3xl shadow-xl border border-outline-variant/10">
               {isSubmitted ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-12">
-                  <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mb-6">
-                    <CheckCircle2 size={32} />
+                  <div className="w-20 h-20 bg-primary/10 text-primary rounded-full flex items-center justify-center mb-6">
+                    <span className="material-symbols-outlined text-5xl">check_circle</span>
                   </div>
-                  <h2 className="text-2xl font-bold text-slate-900 mb-4">Request Received</h2>
-                  <p className="text-slate-600 mb-8">
+                  <h2 className="font-headline font-bold text-3xl text-on-surface mb-4">Request Received</h2>
+                  <p className="text-on-surface-variant mb-8 leading-relaxed">
                     Thank you for reaching out. One of our solution architects will contact you within 24 hours.
                   </p>
-                  <Button variant="outline" onClick={() => setIsSubmitted(false)}>
+                  <button 
+                    className="bg-surface-container-low text-primary px-8 py-4 rounded-xl font-bold text-lg hover:bg-surface-container-high transition-all border border-outline-variant/10"
+                    onClick={() => setIsSubmitted(false)}
+                  >
                     Submit Another Request
-                  </Button>
+                  </button>
                 </div>
               ) : (
                 <>
-                  <h2 className="text-2xl font-bold text-slate-900 mb-6">Request a Consultation</h2>
+                  <h2 className="font-headline font-bold text-3xl text-on-surface mb-8">Request a Consultation</h2>
                   <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
                     <div className="grid grid-cols-2 gap-6">
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-700">First Name</label>
+                        <label className="text-sm font-label font-bold text-on-surface-variant">First Name</label>
                         <input 
                           {...register("firstName")}
                           type="text" 
-                          className={`w-full border ${errors.firstName ? 'border-red-500' : 'border-slate-300'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`} 
+                          className={`w-full bg-surface-container-low border ${errors.firstName ? 'border-error' : 'border-outline-variant/30'} rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all`} 
                         />
-                        {errors.firstName && <p className="text-red-500 text-xs mt-1">{errors.firstName.message}</p>}
+                        {errors.firstName && <p className="text-error text-xs mt-1">{errors.firstName.message}</p>}
                       </div>
                       <div className="space-y-2">
-                        <label className="text-sm font-medium text-slate-700">Last Name</label>
+                        <label className="text-sm font-label font-bold text-on-surface-variant">Last Name</label>
                         <input 
                           {...register("lastName")}
                           type="text" 
-                          className={`w-full border ${errors.lastName ? 'border-red-500' : 'border-slate-300'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`} 
+                          className={`w-full bg-surface-container-low border ${errors.lastName ? 'border-error' : 'border-outline-variant/30'} rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all`} 
                         />
-                        {errors.lastName && <p className="text-red-500 text-xs mt-1">{errors.lastName.message}</p>}
+                        {errors.lastName && <p className="text-error text-xs mt-1">{errors.lastName.message}</p>}
                       </div>
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-slate-700">Work Email</label>
+                      <label className="text-sm font-label font-bold text-on-surface-variant">Work Email</label>
                       <input 
                         {...register("email")}
                         type="email" 
-                        className={`w-full border ${errors.email ? 'border-red-500' : 'border-slate-300'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`} 
+                        className={`w-full bg-surface-container-low border ${errors.email ? 'border-error' : 'border-outline-variant/30'} rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all`} 
                       />
-                      {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email.message}</p>}
+                      {errors.email && <p className="text-error text-xs mt-1">{errors.email.message}</p>}
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-slate-700">Company</label>
+                      <label className="text-sm font-label font-bold text-on-surface-variant">Company</label>
                       <input 
                         {...register("company")}
                         type="text" 
-                        className={`w-full border ${errors.company ? 'border-red-500' : 'border-slate-300'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`} 
+                        className={`w-full bg-surface-container-low border ${errors.company ? 'border-error' : 'border-outline-variant/30'} rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all`} 
                       />
-                      {errors.company && <p className="text-red-500 text-xs mt-1">{errors.company.message}</p>}
+                      {errors.company && <p className="text-error text-xs mt-1">{errors.company.message}</p>}
                     </div>
                     <div className="space-y-2">
-                      <label className="text-sm font-medium text-slate-700">How can we help?</label>
+                      <label className="text-sm font-label font-bold text-on-surface-variant">How can we help?</label>
                       <textarea 
                         {...register("message")}
                         rows={4} 
-                        className={`w-full border ${errors.message ? 'border-red-500' : 'border-slate-300'} rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent`}
+                        className={`w-full bg-surface-container-low border ${errors.message ? 'border-error' : 'border-outline-variant/30'} rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent transition-all`}
                       ></textarea>
-                      {errors.message && <p className="text-red-500 text-xs mt-1">{errors.message.message}</p>}
+                      {errors.message && <p className="text-error text-xs mt-1">{errors.message.message}</p>}
                     </div>
-                    <Button size="xl" variant="premium" className="w-full" disabled={isSubmitting}>
+                    <button 
+                      type="submit"
+                      className="w-full hero-gradient text-on-primary px-8 py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl transition-all disabled:opacity-70 disabled:cursor-not-allowed" 
+                      disabled={isSubmitting}
+                    >
                       {isSubmitting ? "Submitting..." : "Submit Request"}
-                    </Button>
-                    <p className="text-xs text-center text-slate-500 mt-4">
+                    </button>
+                    <p className="text-xs text-center text-outline mt-4">
                       By submitting this form, you agree to our Privacy Policy.
                     </p>
                   </form>
